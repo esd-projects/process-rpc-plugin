@@ -14,17 +14,36 @@ use GoSwoole\BaseServer\Server\Server;
 
 trait GetProcessRpc
 {
-    public function callProcess(Process $process, string $className, float $timeOut = 5): RPCProxy
+    /**
+     * @param Process $process
+     * @param string $className
+     * @param bool $oneway 是否单向
+     * @param float $timeOut
+     * @return RPCProxy
+     * @throws ProcessRPCException
+     */
+    public function callProcess(Process $process, string $className, bool $oneway = false, float $timeOut = 5): RPCProxy
     {
-        return new RPCProxy($process, $className, $timeOut);
+        if ($process == null) {
+            throw new ProcessRPCException("没有该进程");
+        }
+        return new RPCProxy($process, $className, $oneway, $timeOut);
     }
 
-    public function callProcessName(string $processName, string $className, float $timeOut = 5): RPCProxy
+    /**
+     * @param string $processName
+     * @param string $className
+     * @param bool $oneway 是否单向
+     * @param float $timeOut
+     * @return RPCProxy
+     * @throws ProcessRPCException
+     */
+    public function callProcessName(string $processName, string $className, bool $oneway = false, float $timeOut = 5): RPCProxy
     {
         $process = Server::$instance->getProcessManager()->getProcessFromName($processName);
         if ($process == null) {
             throw new ProcessRPCException("没有该进程");
         }
-        return new RPCProxy($process, $className, $timeOut);
+        return new RPCProxy($process, $className, $oneway, $timeOut);
     }
 }

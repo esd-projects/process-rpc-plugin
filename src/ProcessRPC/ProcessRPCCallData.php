@@ -27,13 +27,18 @@ class ProcessRPCCallData
      * @var int
      */
     private $token;
+    /**
+     * @var bool
+     */
+    private $oneway;
 
-    public function __construct(string $className, string $name, array $arguments)
+    public function __construct(string $className, string $name, array $arguments,bool $oneway)
     {
         $this->className = $className;
         $this->name = $name;
         $this->arguments = $arguments;
         $this->token = RpcManager::getToken();
+        $this->oneway = $oneway;
     }
 
     /**
@@ -66,5 +71,13 @@ class ProcessRPCCallData
     public function getToken(): int
     {
         return $this->token;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isOneway(): bool
+    {
+        return $this->oneway;
     }
 }

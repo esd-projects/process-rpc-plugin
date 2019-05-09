@@ -26,6 +26,10 @@ class TestProcess extends Process
 
     public function onProcessStart()
     {
+        //不需要返回
+        $rpc = $this->callProcessName("task-1",TestRPC::class,true);
+        $this->log->debug($rpc->test());
+        //rpc
         $rpc = $this->callProcessName("task-1",TestRPC::class);
         $this->log->debug($rpc->test());
     }

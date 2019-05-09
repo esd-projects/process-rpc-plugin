@@ -18,10 +18,11 @@ class ProcessRPCCallMessage extends Message
      * @param string $className
      * @param string $name
      * @param array $arguments
+     * @param bool $oneway
      */
-    public function __construct(string $className, string $name, array $arguments)
+    public function __construct(string $className, string $name, array $arguments, bool $oneway)
     {
-        parent::__construct(RpcMessageProcessor::type, new ProcessRPCCallData($className, $name, $arguments));
+        parent::__construct(RpcMessageProcessor::type, new ProcessRPCCallData($className, $name, $arguments, $oneway));
     }
 
     public function getProcessRPCCallData(): ProcessRPCCallData

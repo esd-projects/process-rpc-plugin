@@ -48,10 +48,12 @@ class RpcMessageProcessor extends MessageProcessor
                 $errorMessage = $e->getMessage();
                 $this->error($e);
             }
-            Server::$instance->getProcessManager()->getCurrentProcess()->sendMessage(
-                new ProcessRPCResultMessage($rpcCallData->getToken(), $result, $errorClass, $errorCode, $errorMessage),
-                Server::$instance->getProcessManager()->getProcessFromId($message->getFromProcessId())
-            );
+            if(!$rpcCallData->isOneway()) {
+                Server::$instance->getProcessManager()->getCurrentProcess()->sendMessage(
+                    new ProcessRPCResultMessage($rpcCallData->getToken(), $result, $errorClass, $errorCode, $errorMessage),
+                    Server::$instance->getProcessManager()->getProcessFromId($message->getFromProcessId())
+                );
+            }
             return true;
         } else if ($message instanceof ProcessRPCResultMessage) {
             $rpcResultData = $message->getProcessRPCResultData();
