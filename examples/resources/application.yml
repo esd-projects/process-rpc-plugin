@@ -1,0 +1,12 @@
+goswoole:
+  port:
+    http:
+      name: http
+      host: 0.0.0.0
+      port: 8080
+      sock_type: 1
+      open_http_protocol: true
+  process:
+    task-1:
+      class_name: GoSwoole\Plugins\ProcessRPC\ExampleClass\TestProcess
+      group_name: TaskGroup
