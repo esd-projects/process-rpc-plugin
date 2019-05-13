@@ -6,11 +6,11 @@
  * Time: 11:34
  */
 
-namespace GoSwoole\Plugins\ProcessRPC;
+namespace ESD\Plugins\ProcessRPC;
 
 
-use GoSwoole\BaseServer\Coroutine\Channel;
-use GoSwoole\BaseServer\Server\Server;
+use ESD\BaseServer\Coroutine\Channel;
+use ESD\BaseServer\Server\Server;
 
 class RpcManager
 {

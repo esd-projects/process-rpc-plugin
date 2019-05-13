@@ -1,4 +1,4 @@
-goswoole:
+esd:
   port:
     http:
       name: http
@@ -8,5 +8,5 @@ goswoole:
       open_http_protocol: true
   process:
     task-1:
-      class_name: GoSwoole\Plugins\ProcessRPC\ExampleClass\TestProcess
+      class_name: ESD\Plugins\ProcessRPC\ExampleClass\TestProcess
       group_name: TaskGroup

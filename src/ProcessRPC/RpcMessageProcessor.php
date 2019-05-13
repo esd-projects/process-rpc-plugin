@@ -6,13 +6,13 @@
  * Time: 10:19
  */
 
-namespace GoSwoole\Plugins\ProcessRPC;
+namespace ESD\Plugins\ProcessRPC;
 
 
-use GoSwoole\BaseServer\Plugins\Logger\GetLogger;
-use GoSwoole\BaseServer\Server\Message\Message;
-use GoSwoole\BaseServer\Server\Message\MessageProcessor;
-use GoSwoole\BaseServer\Server\Server;
+use ESD\BaseServer\Plugins\Logger\GetLogger;
+use ESD\BaseServer\Server\Message\Message;
+use ESD\BaseServer\Server\Message\MessageProcessor;
+use ESD\BaseServer\Server\Server;
 
 class RpcMessageProcessor extends MessageProcessor
 {

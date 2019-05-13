@@ -6,7 +6,7 @@
  * Time: 10:30
  */
 
-namespace GoSwoole\Plugins\ProcessRPC;
+namespace ESD\Plugins\ProcessRPC;
 
 
 class ProcessRPCData

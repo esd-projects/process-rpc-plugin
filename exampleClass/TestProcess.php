@@ -6,11 +6,11 @@
  * Time: 11:54
  */
 
-namespace GoSwoole\Plugins\ProcessRPC\ExampleClass;
+namespace ESD\Plugins\ProcessRPC\ExampleClass;
 
-use GoSwoole\BaseServer\Server\Message\Message;
-use GoSwoole\BaseServer\Server\Process;
-use GoSwoole\Plugins\ProcessRPC\GetProcessRpc;
+use ESD\BaseServer\Server\Message\Message;
+use ESD\BaseServer\Server\Process;
+use ESD\Plugins\ProcessRPC\GetProcessRpc;
 
 class TestProcess extends Process
 {

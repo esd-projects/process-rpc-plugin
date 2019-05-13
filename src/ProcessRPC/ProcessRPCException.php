@@ -6,10 +6,10 @@
  * Time: 11:24
  */
 
-namespace GoSwoole\Plugins\ProcessRPC;
+namespace ESD\Plugins\ProcessRPC;
 
 
-use GoSwoole\BaseServer\Exception;
+use ESD\BaseServer\Exception;
 
 class ProcessRPCException extends Exception
 {

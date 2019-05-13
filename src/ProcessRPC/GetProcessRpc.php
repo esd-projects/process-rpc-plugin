@@ -6,11 +6,11 @@
  * Time: 10:15
  */
 
-namespace GoSwoole\Plugins\ProcessRPC;
+namespace ESD\Plugins\ProcessRPC;
 
 
-use GoSwoole\BaseServer\Server\Process;
-use GoSwoole\BaseServer\Server\Server;
+use ESD\BaseServer\Server\Process;
+use ESD\BaseServer\Server\Server;
 
 trait GetProcessRpc
 {

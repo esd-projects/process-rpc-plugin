@@ -6,10 +6,10 @@
  * Time: 10:25
  */
 
-namespace GoSwoole\Plugins\ProcessRPC;
+namespace ESD\Plugins\ProcessRPC;
 
 
-use GoSwoole\BaseServer\Server\Message\Message;
+use ESD\BaseServer\Server\Message\Message;
 
 class ProcessRPCCallMessage extends Message
 {

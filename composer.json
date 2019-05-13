@@ -1,11 +1,11 @@
 {
   "require": {
-    "go-swoole/base-server":"~0.1"
+    "esd/base-server":"~0.1"
   },
   "autoload": {
     "psr-4": {
-      "GoSwoole\\Plugins\\": "src/",
-      "GoSwoole\\Plugins\\ProcessRPC\\ExampleClass\\": "exampleClass/"
+      "ESD\\Plugins\\": "src/",
+      "ESD\\Plugins\\ProcessRPC\\ExampleClass\\": "exampleClass/"
     }
   },
   "authors": [
@@ -15,7 +15,7 @@
       "homepage": "https://github.com/tmtbe"
     }
   ],
-  "name": "go-swoole/process-rpc-plugin",
+  "name": "esd/process-rpc-plugin",
   "type": "library",
   "keywords": ["server", "swoole"],
   "description": "process-rpc-plugin",

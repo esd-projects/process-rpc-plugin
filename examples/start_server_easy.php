@@ -1,9 +1,9 @@
 <?php
 
-use GoSwoole\BaseServer\ExampleClass\Server\DefaultServer;
-use GoSwoole\BaseServer\ExampleClass\Server\DefaultServerPort;
-use GoSwoole\Plugins\ProcessRPC\ExampleClass\TestProcess;
-use GoSwoole\Plugins\ProcessRPC\ProcessRPCPlugin;
+use ESD\BaseServer\ExampleClass\Server\DefaultServer;
+use ESD\BaseServer\ExampleClass\Server\DefaultServerPort;
+use ESD\Plugins\ProcessRPC\ExampleClass\TestProcess;
+use ESD\Plugins\ProcessRPC\ProcessRPCPlugin;
 
 require __DIR__ . '/../vendor/autoload.php';
 

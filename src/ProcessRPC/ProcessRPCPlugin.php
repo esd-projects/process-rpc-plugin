@@ -6,11 +6,11 @@
  * Time: 9:27
  */
 
-namespace GoSwoole\Plugins\ProcessRPC;
+namespace ESD\Plugins\ProcessRPC;
 
-use GoSwoole\BaseServer\Server\Context;
-use GoSwoole\BaseServer\Server\Message\MessageProcessor;
-use GoSwoole\BaseServer\Server\PlugIn\AbstractPlugin;
+use ESD\BaseServer\Server\Context;
+use ESD\BaseServer\Server\Message\MessageProcessor;
+use ESD\BaseServer\Server\PlugIn\AbstractPlugin;
 
 class ProcessRPCPlugin extends AbstractPlugin
 {
@@ -37,7 +37,7 @@ class ProcessRPCPlugin extends AbstractPlugin
      * 在进程启动前
      * @param Context $context
      * @return mixed
-     * @throws \GoSwoole\BaseServer\Exception
+     * @throws \ESD\BaseServer\Exception
      */
     public function beforeProcessStart(Context $context)
     {

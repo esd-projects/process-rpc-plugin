@@ -6,7 +6,7 @@
  * Time: 11:57
  */
 
-namespace GoSwoole\Plugins\ProcessRPC\ExampleClass;
+namespace ESD\Plugins\ProcessRPC\ExampleClass;
 
 
 class TestRPC
