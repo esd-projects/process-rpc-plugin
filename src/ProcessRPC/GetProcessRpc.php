@@ -9,8 +9,8 @@
 namespace ESD\Plugins\ProcessRPC;
 
 
-use ESD\BaseServer\Server\Process;
-use ESD\BaseServer\Server\Server;
+use ESD\Core\Server\Process\Process;
+use ESD\Core\Server\Server;
 
 trait GetProcessRpc
 {

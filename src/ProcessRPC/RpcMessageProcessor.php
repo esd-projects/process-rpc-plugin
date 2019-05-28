@@ -8,11 +8,10 @@
 
 namespace ESD\Plugins\ProcessRPC;
 
-
-use ESD\BaseServer\Plugins\Logger\GetLogger;
-use ESD\BaseServer\Server\Message\Message;
-use ESD\BaseServer\Server\Message\MessageProcessor;
-use ESD\BaseServer\Server\Server;
+use ESD\Core\Message\Message;
+use ESD\Core\Message\MessageProcessor;
+use ESD\Core\Plugins\Logger\GetLogger;
+use ESD\Core\Server\Server;
 
 class RpcMessageProcessor extends MessageProcessor
 {

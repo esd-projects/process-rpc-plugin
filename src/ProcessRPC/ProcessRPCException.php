@@ -9,7 +9,7 @@
 namespace ESD\Plugins\ProcessRPC;
 
 
-use ESD\BaseServer\Exception;
+use ESD\Core\Exception;
 
 class ProcessRPCException extends Exception
 {

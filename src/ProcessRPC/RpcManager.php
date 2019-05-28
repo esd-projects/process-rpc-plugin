@@ -9,8 +9,7 @@
 namespace ESD\Plugins\ProcessRPC;
 
 
-use ESD\BaseServer\Coroutine\Channel;
-use ESD\BaseServer\Server\Server;
+use ESD\Core\Channel\Channel;
 
 class RpcManager
 {
@@ -28,7 +27,7 @@ class RpcManager
 
     public static function getChannel($token): Channel
     {
-        self::$channelMap[$token] = new Channel();
+        self::$channelMap[$token] = DIGet(Channel::class);
         return self::$channelMap[$token];
     }
 

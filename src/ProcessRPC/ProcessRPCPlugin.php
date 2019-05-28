@@ -8,9 +8,10 @@
 
 namespace ESD\Plugins\ProcessRPC;
 
-use ESD\BaseServer\Server\Context;
-use ESD\BaseServer\Server\Message\MessageProcessor;
-use ESD\BaseServer\Server\PlugIn\AbstractPlugin;
+
+use ESD\Core\Context\Context;
+use ESD\Core\Message\MessageProcessor;
+use ESD\Core\PlugIn\AbstractPlugin;
 
 class ProcessRPCPlugin extends AbstractPlugin
 {
@@ -37,7 +38,7 @@ class ProcessRPCPlugin extends AbstractPlugin
      * 在进程启动前
      * @param Context $context
      * @return mixed
-     * @throws \ESD\BaseServer\Exception
+     * @throws \ESD\Core\Exception
      */
     public function beforeProcessStart(Context $context)
     {

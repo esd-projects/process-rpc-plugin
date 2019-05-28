@@ -8,8 +8,7 @@
 
 namespace ESD\Plugins\ProcessRPC;
 
-
-use ESD\BaseServer\Server\Message\Message;
+use ESD\Core\Message\Message;
 
 class ProcessRPCCallMessage extends Message
 {
