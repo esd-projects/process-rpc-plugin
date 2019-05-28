@@ -1,15 +1,15 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: administrato
+ * User: 白猫
  * Date: 2019/5/9
  * Time: 11:54
  */
 
 namespace ESD\Plugins\ProcessRPC\ExampleClass;
 
-use ESD\BaseServer\Server\Message\Message;
-use ESD\BaseServer\Server\Process;
+use ESD\Core\Message\Message;
+use ESD\Core\Server\Process\Process;
 use ESD\Plugins\ProcessRPC\GetProcessRpc;
 
 class TestProcess extends Process
