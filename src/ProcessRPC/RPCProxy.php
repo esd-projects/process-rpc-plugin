@@ -77,12 +77,14 @@ class RPCProxy
 
     /**
      * 开启一个事务
+     * @param callable $call
+     * @throws \Throwable
      */
-    public function startTransaction()
+    public function startTransaction(callable $call)
     {
         if ($this->sessionId != null) return;
         $oneway = $this->oneway;
-        $this->oneway = true;
+        $this->oneway = false;
         try {
             $this->sessionId = $this->__call("__getSession", []);
         } catch (\Throwable $e) {
@@ -90,16 +92,24 @@ class RPCProxy
         } finally {
             $this->oneway = $oneway;
         }
+        try {
+            $call();
+        } catch (\Throwable $e) {
+            $this->_endTransaction();
+        } finally {
+            $this->_endTransaction();
+        }
+
     }
 
     /**
      * 结束一个事务
      */
-    public function endTransaction()
+    protected function _endTransaction()
     {
-        if ($this->sessionId != null) return;
+        if ($this->sessionId == null) return;
         $oneway = $this->oneway;
-        $this->oneway = true;
+        $this->oneway = false;
         try {
             $this->__call("__clearSession", []);
         } catch (\Throwable $e) {
