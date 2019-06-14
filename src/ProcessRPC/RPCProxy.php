@@ -80,7 +80,15 @@ class RPCProxy
      */
     public function startTransaction()
     {
-        $this->sessionId = $this->__call("__getSession", []);
+        $oneway = $this->oneway;
+        $this->oneway = true;
+        try {
+            $this->sessionId = $this->__call("__getSession", []);
+        } catch (\Throwable $e) {
+            throw $e;
+        } finally {
+            $this->oneway = $oneway;
+        }
     }
 
     /**
@@ -88,7 +96,15 @@ class RPCProxy
      */
     public function endTransaction()
     {
-        $this->__call("__clearSession", []);
+        $oneway = $this->oneway;
+        $this->oneway = true;
+        try {
+            $this->__call("__clearSession", []);
+        } catch (\Throwable $e) {
+            throw $e;
+        }finally{
+            $this->oneway = $oneway;
+        }
         $this->sessionId = null;
     }
 }
