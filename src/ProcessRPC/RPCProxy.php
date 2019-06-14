@@ -17,19 +17,19 @@ class RPCProxy
     /**
      * @var Process
      */
-    private $process;
+    protected $process;
     /**
      * @var string
      */
-    private $className;
+    protected $className;
     /**
      * @var float
      */
-    private $timeOut;
+    protected $timeOut;
     /**
      * @var bool
      */
-    private $oneway;
+    protected $oneway;
 
     public function __construct(Process $process, string $className, bool $oneway, float $timeOut = 0)
     {
