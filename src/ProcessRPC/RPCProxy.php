@@ -80,6 +80,7 @@ class RPCProxy
      */
     public function startTransaction()
     {
+        if ($this->sessionId != null) return;
         $oneway = $this->oneway;
         $this->oneway = true;
         try {
@@ -96,13 +97,14 @@ class RPCProxy
      */
     public function endTransaction()
     {
+        if ($this->sessionId != null) return;
         $oneway = $this->oneway;
         $this->oneway = true;
         try {
             $this->__call("__clearSession", []);
         } catch (\Throwable $e) {
             throw $e;
-        }finally{
+        } finally {
             $this->oneway = $oneway;
         }
         $this->sessionId = null;
