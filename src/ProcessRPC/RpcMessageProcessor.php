@@ -18,6 +18,16 @@ class RpcMessageProcessor extends MessageProcessor
     use GetLogger;
     const type = "@processRPC";
 
+    /**
+     * @var array
+     */
+    protected $sessions = [];
+
+    /**
+     * @var Message[]
+     */
+    protected $cacheMessages = [];
+
     public function __construct()
     {
         parent::__construct(self::type);
@@ -39,19 +49,51 @@ class RpcMessageProcessor extends MessageProcessor
             $errorClass = null;
             $errorCode = null;
             $errorMessage = null;
-            try {
-                $result = call_user_func_array([$handle, $rpcCallData->getName()], $rpcCallData->getArguments());
-            } catch (\Throwable $e) {
-                $errorClass = get_class($e);
-                $errorCode = $e->getCode();
-                $errorMessage = $e->getMessage();
-                $this->error($e);
+
+            $lockSessionId = $this->sessions[$rpcCallData->getClassName()] ?? null;
+            $sessionId = $rpcCallData->getArguments()['sessionId'] ?? null;
+            $args = $rpcCallData->getArguments();
+            if ($lockSessionId === $sessionId) {
+                if ($sessionId != null) {
+                    unset($args['sessionId']);
+                }
+                if ($rpcCallData->getName() == "__getSession") {
+                    $result = time();
+                    $this->sessions[$rpcCallData->getClassName()] = $result;
+                } elseif ($rpcCallData->getName() == "__clearSession") {
+                    $result = $this->sessions[$rpcCallData->getClassName()] ?? null;
+                    unset($this->sessions[$rpcCallData->getClassName()]);
+                } else {
+                    try {
+                        $result = call_user_func_array([$handle, $rpcCallData->getName()], $args);
+                    } catch (\Throwable $e) {
+                        $errorClass = get_class($e);
+                        $errorCode = $e->getCode();
+                        $errorMessage = $e->getMessage();
+                        $this->error($e);
+                    }
+                }
+            } else {
+                //事务id不匹配,将消息缓存了
+                $this->cacheMessages[$rpcCallData->getClassName()][] = $message;
+                return true;
             }
-            if(!$rpcCallData->isOneway()) {
+            if (!$rpcCallData->isOneway()) {
                 Server::$instance->getProcessManager()->getCurrentProcess()->sendMessage(
                     new ProcessRPCResultMessage($rpcCallData->getToken(), $result, $errorClass, $errorCode, $errorMessage),
                     Server::$instance->getProcessManager()->getProcessFromId($message->getFromProcessId())
                 );
+            }
+            //处理缓存
+            if (!isset($this->sessions[$rpcCallData->getClassName()])) {
+                $cacheMessages = $this->cacheMessages[$rpcCallData->getClassName()] ?? null;
+                if (!empty($cacheMessages)) {
+                    foreach ($cacheMessages as $cacheMessage) {
+                        goWithContext(function () use ($cacheMessage) {
+                            $this->handler($cacheMessage);
+                        });
+                    }
+                }
             }
             return true;
         } else if ($message instanceof ProcessRPCResultMessage) {

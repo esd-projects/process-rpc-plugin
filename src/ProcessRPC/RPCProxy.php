@@ -31,6 +31,11 @@ class RPCProxy
      */
     protected $oneway;
 
+    /**
+     * @var int
+     */
+    protected $sessionId;
+
     public function __construct(Process $process, string $className, bool $oneway, float $timeOut = 0)
     {
         $this->process = $process;
@@ -47,6 +52,9 @@ class RPCProxy
      */
     public function __call($name, $arguments)
     {
+        if ($this->sessionId != null) {
+            $arguments['sessionId'] = $this->sessionId;
+        }
         $message = new ProcessRPCCallMessage($this->className, $name, $arguments, $this->oneway);
         if (!$this->oneway) {
             $channel = RpcManager::getChannel($message->getProcessRPCCallData()->getToken());
@@ -65,5 +73,22 @@ class RPCProxy
                 throw new ProcessRPCException("超时");
             }
         }
+    }
+
+    /**
+     * 开启一个事务
+     */
+    public function startTransaction()
+    {
+        $this->sessionId = $this->__call("__getSession", []);
+    }
+
+    /**
+     * 结束一个事务
+     */
+    public function endTransaction()
+    {
+        $this->__call("__clearSession", []);
+        $this->sessionId = null;
     }
 }
